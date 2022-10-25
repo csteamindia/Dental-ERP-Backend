@@ -3,15 +3,32 @@
 	/***
 	* Company Profile Details
 	*/
-	function profile($col){
+	function ProfileHelper($col){
 		$ci = &get_instance();
 		return $ci->db->select($col)->get('company')->row()->$col;
 	}
 
-	function get_gst($id, $col = 'gstno'){
+	/***
+	 * Get GST Number
+	 * 
+	 * @param string $id
+	 * @param string $column
+	 */
+	function GetClientGSTHelper($id, $col = 'gstno'){
 		$ci = &get_instance();
 		return $ci->db->select($col)->where('client', $id)->get('client_billing')->row()->$col;
 	}
+
+	/***
+	 * Get Case Or Model Number
+	 */
+	function GetCaseNumberHelper(){
+		$ci = &get_instance();
+		$CN = $ci->db->select('case_no')->order_by('id', 'desc')->get(ORDERS)->row()->case_no;
+		return $CN+1;
+
+	}
+
 	
 	//Get Title By Code
 	function get_title($code, $tbl){

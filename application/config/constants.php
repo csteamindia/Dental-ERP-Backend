@@ -86,5 +86,8 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 
 // Tables
-defined('ORDERS')      OR define('ORDERS', 'orders_new'); // OrdersTables
-defined('ORDER_PRODUCTS')      OR define('ORDER_PRODUCTS', 'order_products'); // Order Product Tables
+defined('ORDERS')           OR define('ORDERS', 'orders_new'); // OrdersTables
+defined('ORDER_PRODUCTS')   OR define('ORDER_PRODUCTS', 'order_products'); // Order Product Tables
+defined('CLIENTS')          OR define('CLIENTS', 'clients'); // Clients Tables
+defined('SHIPMENTS')        OR define('SHIPMENTS', 'shipments'); // Shipments Tables
+defined('PRIORITY')        OR define('PRIORITY', 'priority'); // priority Tables

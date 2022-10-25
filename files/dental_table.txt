@@ -1,0 +1,26 @@
+Tables
+
+Companny - done
+Department - done
+Designation - done
+Lab Department - done
+Countries - done
+States - done
+Cities - done
+Stations - done
+Zones - done
+Source - done
+Qualifications - done
+Correction Template - done
+Roles - done
+Privilizes - done
+Locations - done
+Shades  - done
+Shade_guild  - done
+Product  - done
+Product_category  - done
+Product_type - done
+productgroup - done
+warranty - done
+warranty_cards - done
+warrenty_card - done

@@ -66,7 +66,6 @@
 		return $html;
 	}
 
-
 	function get_role($id){
 		if($id == 'admin')
 			return 'admin';
@@ -343,7 +342,7 @@
 	function get_client_by_case($cn){
 		$ci = &get_instance();
 		$client_code = $ci->db->where('modal_no', $cn)->get('orders')->row()->client_code;
-		return get_clientname($client_code);
+		return GetClientNameHelper($client_code);
 	}
 
 	function get_last_order($id){

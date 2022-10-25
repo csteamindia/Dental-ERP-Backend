@@ -53,10 +53,10 @@
  *
  * NOTE: If you change these, also change the error_reporting() code below
  */
-define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
-	// if($_SERVER['REMOTE_ADDR'] == 'localhost'){
+// if($_SERVER['REMOTE_ADDR'] == 'localhost'){
 	// }else{
 		// define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'production');
+		define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 	// }
 
 /*

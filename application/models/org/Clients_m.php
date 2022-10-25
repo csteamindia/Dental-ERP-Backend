@@ -27,4 +27,8 @@ class Clients_m extends CI_Model {
 		return $this->db->affected_rows();
     }
 
+    function getClientOptions(){
+        return $this->db->select('clientname as label, code as value')->where('status', 0)->get(CLIENTS)->result();
+    }
+
 }

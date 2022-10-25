@@ -9,7 +9,7 @@ class Orders extends CI_Controller {
 		$this->data = getBodyData();
 	}
     
-    function getcasenumber(){
+    function GetCaseNumberHelper(){
         $res = $this->db->select('case_no, order_number')->order_by('id', "desc")->limit(1)->get(ORDERS)->row();
         SuccessResponse("fetch successfully", $res);
     }
@@ -35,6 +35,13 @@ class Orders extends CI_Controller {
 				$this->newOrder();
                 break;
         }
+    }
+
+    function client($id){
+        $clientName = GetClientNameHelper($id);
+        $caseNo = GetCaseNumberHelper();
+        SuccessResponse("request", ['client'=> $clientName, 'caseNo'=>$caseNo]);
+        return;
     }
 
     private function newOrder(){
@@ -79,6 +86,7 @@ class Orders extends CI_Controller {
             if($this->data->order_id == null){
                 $object['order_number'] = $this->generateOrderNumber($this->data->client);
                 $object['case_no'] = $this->data->case_no;
+
                 if($this->db->insert(ORDERS, $object)){
                     $products = $this->data->products;
                     $productsObject = [];

@@ -5,20 +5,34 @@
 		-- rpd_clients
 		output -> "name" as string
 	*/
-	function get_clientname($id){
+	function GetClientNameHelper($id){
 		$ci = &get_instance();
-		return $ci->db->where('id', $id)->or_where('code', $id)->get('clients')->row()->clientname;
+		return $ci->db->select('clientname')->where('id', $id)->or_where('code', $id)->get('clients')->row()->clientname;
 	}
 
-	function get_client_remark($id){
+	/***
+	 * Get Remark In JobCard
+	 */
+	function GetClientRemarkHelper($id){
 		$ci = &get_instance();
 		return $ci->db->where('id', $id)->get('clients')->row()->remark1;
 	}
 
-	function get_client_category($id){
+	/***
+	 * Get clientsCategory
+	 */
+	function GetClientCategoryHelper($id){
 		$ci = &get_instance();
 		$code = $ci->db->where('id', $id)->get('clients')->row()->customercateory;
 		return $ci->db->where('code', $code)->get('client_category')->row()->title;
+	}
+
+	/***
+	 * Get Client Options
+	 */
+	function GetClientOptionsHelper(){
+		$ci = &get_instance();
+		return $ci->db->select('clientname as label, code as value')->where('status', 0)->get('clients')->result();
 	}
 
 	/***
