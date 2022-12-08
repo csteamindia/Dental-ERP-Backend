@@ -17,7 +17,7 @@ class Employee_m extends CI_Model {
 		$this->db->from($this->table.' as e')
 		->join('location as l', 'l.code = e.location', 'left')
 		->join('designation as d', 'd.code = e.designation', 'left')
-		->order_by('e.code', 'asc');
+		->order_by('e.id', 'asc');
 		if($id) {
 			$this->db->where('e.id', $id);
 		}

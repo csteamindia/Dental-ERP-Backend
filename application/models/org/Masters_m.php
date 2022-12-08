@@ -39,15 +39,45 @@ class Masters_m extends CI_Model {
 	}
 
 	function liatAllMaster($table, $id = false){
-        if($id)
-            $this->db->where('id', $id);
-            
-        return $this->db->get($this->tables[$table])->result();
+		switch($this->tables[$table]){
+			case 'cities':
+				return $this->citiesData($id);
+			case 'stations':
+				return $this->stationsData($id);
+			default:
+				if($id) $this->db->where('id', $id);
+
+				return $this->db->order_by('id', 'asc')->get($this->tables[$table])->result();
+				
+		}
     }
+
+	function citiesData ($id = false){
+		$this->db->select('c.*, s.title as state, s.id as state_id, con.title as country, con.id as country_id')
+		->from('cities as c')
+		->join('states as s', 's.id = c.state', 'inner')
+		->join('country as con', 'con.id = c.country', 'inner');
+
+		if($id) $this->db->where('c.id', $id);
+
+		return $this->db->order_by('c.id', 'asc')->get()->result();
+	}
+	
+	function stationsData ($id = false){
+		$this->db->select('st.*, c.title as city, c.id as city_id, s.title as state, s.id as state_id, con.title as country, con.id as country_id')
+		->from('stations as st')
+		->join('cities as c', 'c.id = st.state', 'inner')
+		->join('states as s', 's.id = st.state', 'inner')
+		->join('country as con', 'con.id = st.country', 'inner');
+
+		if($id) $this->db->where('st.id', $id);
+
+		return $this->db->order_by('st.id', 'asc')->get()->result();
+	}
 
     function addorupdate($table, $data, $id = false){
 		if(empty($id))
-			return $this->db->insert($this->tables[$table], $data) ?$this->db->where('id', $this->db->insert_id())->get($this->tables[$table])->row() : false;
+			return $this->db->insert($this->tables[$table], $data) ? $this->db->where('id', $this->db->insert_id())->get($this->tables[$table])->row() : false;
 		else{
 			$this->db->set($data)->where('id', $id)->update($this->tables[$table]);
 			return $this->db->affected_rows() ? $this->db->set($data)->where('id', $id)->get($this->tables[$table])->row() : false;

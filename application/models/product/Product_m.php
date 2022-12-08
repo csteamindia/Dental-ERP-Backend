@@ -8,8 +8,13 @@ class Product_m extends CI_Model {
 	}
 
     function liatAllProducts($id = false){
-        $this->db->select('p.*, b.brand as abrand, c.title as acategory, g.group as agroup, t.title as atype, w.title as awarranty')->from($this->table.' as p')->join('productbrand as b', 'b.id = p.brand', 'left')->join('productgroup as g', 'g.id = p.group', 'left')->join('productcategory as c', 'c.code = p.category', 'left')
-		->join('producttype as t', 't.code = p.type', 'left')->join('warranty as w', 'w.id = p.warranty', 'left');
+        $this->db->select('p.*, b.brand as abrand, c.title as acategory, g.title as agroup, t.title as atype, w.title as awarranty')
+        ->from($this->table.' as p')
+        ->join('productbrand as b', 'b.id = p.brand', 'left')
+        ->join('productgroup as g', 'g.id = p.group', 'left')
+        ->join('productcategory as c', 'c.code = p.category', 'left')
+		->join('producttype as t', 't.code = p.type', 'left')
+        ->join('warranty as w', 'w.id = p.warranty', 'left');
         
         if(!empty($id))
             $this->db->where('p.id', $id);

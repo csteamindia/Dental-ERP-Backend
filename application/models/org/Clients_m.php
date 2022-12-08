@@ -8,9 +8,16 @@ class Clients_m extends CI_Model {
 
     function getAllClients($id = false){
         if($id)
-            $this->db->where('id', $id);
-            
-        return $this->db->get($this->table)->result();
+            $this->db->where('c.id', $id);
+
+        $this->db->select('c.*, s.title as state, s.id as state_id, con.title as country, con.id as country_id, ci.title as city, ci.id as city_id, station.title as station, station.id as station_id')
+        ->from($this->table.' as c')
+        ->join('cities as ci', 'ci.id = c.city', 'inner')
+        ->join('states as s', 's.id = c.state', 'inner')
+        ->join('country as con', 'con.id = c.country', 'inner')
+        ->join('stations as station', 'station.id = c.station', 'inner');
+
+        return $this->db->order_by('c.id', 'asc')->get()->result();
     }
 
     function addorupdate($data, $id = false){

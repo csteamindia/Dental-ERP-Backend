@@ -69,17 +69,21 @@ class Masters extends CI_Controller {
 			$arr["previlize"] = json_encode($this->data->privileges);
 
 		// shade 
-		if(isset($this->data->shade) && !empty($this->data->shade))
-			$arr["previlize"] = json_encode($this->data->shade);
+		if(isset($this->data->shadeguide) && !empty($this->data->shadeguide))
+			$arr["shadeguide"] = $this->data->shadeguide;
 		
-			// product_category 
+		// product_category
 		if(isset($this->data->category) && !empty($this->data->category))
 			$arr["product_category"] = json_encode($this->data->category);
+
+		// // product_category
+		// if(isset($this->data->category) && !empty($this->data->category))
+		// 	$arr["product_category"] = json_encode($this->data->category);
 
 
         if($is_type) {
 			$res = $this->ms->addorupdate($this->table, $arr, $this->input->get('q'));
-			if(empty($res['code']))
+			if($this->db->affected_rows())
 				SuccessResponse("Updated");
 			else
 				FailedResponse();
